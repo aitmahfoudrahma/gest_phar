@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Management System</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-B2Rzg8uNnk56D6t9oCMc79h/Mu2zrIu81/PBCXD6n4ZI91pZRlPnmWuY5mn9FdkYpPDCYF2KZvF3Z63s1yTINQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0; /* Ajout pour éviter le débordement du contenu sur les côtés */
+        }
+
+
+        nav {
+            background-color:     #1c7a73  ;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        nav a:hover {
+            color:   blue ;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 60px;
+        }
+
+        nav ul ul {
+            display: none;
+            position: absolute;
+            background-color:   #1c7a73  ;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul li:hover > ul {
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul ul li {
+            width: 100%;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .content .banner h1 {
+            color: red;
+            position: relative;
+            z-index: 2;
+
+        }
+
+        .banner {
+            width: 100%;
+            height: 250px;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .content.banner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 30vh;
+        }
+
+
+        .icons-container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 8px;
+            margin: 0 8px;
+            z-index: 1;
+        }
+
+        .view-icons,
+        .action-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .view-icons a,
+        .action-icons a {
+            text-decoration: none;
+            color: #136445;
+            margin: 0 10px;
+        }
+
+        .view-icons a:hover,
+        .action-icons a:hover {
+            color: #80c5b4;
+        }
+
+        .description-gel {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 20px;
+            width: 800px;
+            height: auto;
+            bottom: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #136445;
+            padding: 20px;
+        }
+
+        .description-gel h2 {
+            color:   #797f7d ;
+        }
+
+        .description-gel h3 {
+            color:  #acafae ;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer a {
+            color: #057e73;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #80c5b4;
+        }
+
+
+
+    .description-section {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 21px;
+            margin: 2px;
+            width: 70%;
+            bottom: 100px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0);
+            opacity: 1;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .description-section h2 {
+            color: #136445;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .description-section h3 {
+            color: #136445;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .description-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .description-section ul {
+            text-align: left;
+            margin-left: 30px;
+        }
+
+        .description-section li {
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.5;
+
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'medicament_list' %}">💊 Medicaments</a></li>
+            <li><a href="{% url 'fournisseur_list' %}">🚚 Fournisseurs</a></li>
+            <li><a href="{% url 'clients_list' %}">👥 Clients</a></li>
+            <li><a href="{% url 'commandes_list' %}">🛒 Commandes</a></li>
+            <li><a href="{% url 'ventes_list' %}">📦 Ventes</a></li>
+            <li><a href="{% url 'assurances_list' %}">🌐 Assurance</a></li>
+            <li><a href="{% url 'contact' %}">📞 Contact</a></li>
+            <li>
+                <a href="#">➕ Ajouter</a>
+                <ul>
+                    <li><a href="{% url 'create_medicament' %}">💊 Ajouter Medicament</a></li>
+                    <li><a href="{% url 'create_fournisseur' %}">🚚 Ajouter Fournisseur</a></li>
+                    <li><a href="{% url 'create_client' %}">👥 Ajouter Client</a></li>
+                    <li><a href="{% url 'make_order' %}">🛒 Effectuer Commande</a></li>
+                    <li><a href="{% url 'make_vente' %}">📦 Effectuer Vente</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="content banner">
+    <h1 style="font-weight: bold; font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; font-size: 50px; color: #333; text-shadow: 2px 2px 0 #a3e4d7;">
+        Welcome to the Pharmacy Management System
+    </h1>
+    </div>
+
+        <!-- Description Gel -->
+    <div class="description-gel">
+        <h3>Votre solution complète pour la gestion efficace des données.</h3>
+
+    </div>
+    <div style="margin-top: auto;"></div>
+
+
+    <div class="description-section ">
+    <h2>Le Pharmacy Management System</h2>
+    <p>
+        Une application en ligne destinée au personnel pharmaceutique pour faciliter la gestion des stocks, des ventes, des achats et des fournisseurs de médicaments.
+    </p>
+
+    <h3> Fonctionnalités 🔧</h3>
+    <ul>
+        <li><strong>Gestion des Médicaments:</strong> Ajoutez de nouveaux médicaments avec des détails complets tels que le nom, le prix, la date de péremption, etc.</li>
+        <li><strong>Gestion des Fournisseurs:</strong> Suivez les fournisseurs de médicaments, leurs informations de contact et les médicaments qu'ils fournissent.</li>
+        <li><strong>Gestion des Clients:</strong> Enregistrez les informations des clients, y compris les détails de l'assurance le cas échéant.</li>
+        <li><strong>Commandes et Ventes:</strong> Effectuez des commandes et des ventes de médicaments, suivez les quantités, les prix et générez des rapports.</li>
+    </ul>
+
+    <h3> Comment Utiliser ❓ </h3>
+        <ul>
+        <li><strong>Ajouter un Médicament:</strong> Accédez à la page "Ajouter Médicament" pour enregistrer de nouveaux médicaments dans le système.</li>
+        <li><strong>Gérer les Fournisseurs:</strong> Utilisez la page "Fournisseurs" pour voir la liste des fournisseurs et leurs détails.</li>
+        <li><strong>Effectuer une Vente:</strong> Accédez à la page "Effectuer Vente" pour vendre des médicaments, suivre les quantités et calculer les prix.</li>
+        <li><strong>Gérer les Clients:</strong> Explorez la page "Clients" pour voir la liste des clients enregistrés.</li>
+        </ul>
+    </div>
+
+
+ <!-- Pied de page -->
+    <footer style="position: fixed; bottom: 0; width: 100%; background-color: rgba(456, 335, 655, 0.2); padding: 0px; text-align: center; display: flex; justify-content: space-between;">
+        <!-- Options -->
+        <div class="footer-options">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.example.com" target="_blank" rel="noopener noreferrer" title="Partager sur Facebook"><i class="fab fa-facebook-square"></i>🇫 Facebook </a>
+            <a href="https://twitter.com/intent/tweet?url={{ your_page_url }}&text=Pharmacy%20Management%20System" target="_blank" rel="noopener noreferrer" title="Partager sur Twitter"><i class="fab fa-twitter-square"></i>🐦 Twitter </a>
+            <a href="whatsapp://send?text=Pharmacy%20Management%20System%20{{ your_page_url }}" target="_blank" rel="noopener noreferrer" title="Partager sur WhatsApp"><i class="fab fa-whatsapp-square"></i> 📲 WhatsApp </a>
+
+            <a href="javascript:window.print();"><i class="fas fa-print"></i>🖨️ Imprimer </a>
+            <a href="{% url 'contact' %}"><i class="fas fa-envelope"></i>✉️ Contacter </a>
+
+        </div>
+
+
+
+    <p>&copy; 2023 Pharmacy Management System. Tous droits réservés.</p>
+
+    </footer>
+
+</body>
+
+</html>
+
